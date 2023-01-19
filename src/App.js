@@ -8,14 +8,19 @@ import Greeting from "./components/Greeting";
 function App() {
   const [count, setCount] = useState(0)
 
-  const handleBtnClick = () => {
+  const handleIncrement = () => {
     setCount(count + 1)
+  }
+
+  const handleDecrement = () => {
+    setCount(count - 1)
   }
 
   return (
     <div className="App">
       <h1>Count: {count}</h1>
-      <button onClick={handleBtnClick}>Click Me</button>
+      <button onClick={handleIncrement}>+</button>
+      <button onClick={handleDecrement}>-</button>
 
       {/* {names.map((name, i) => (
         <Greeting key={i} name={name} />
