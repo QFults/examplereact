@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Greeting from "./components/Greeting";
 
 // const name = "John Doe";
@@ -7,6 +7,10 @@ import Greeting from "./components/Greeting";
 
 function App() {
   const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    localStorage.setItem('count', count)
+  })
 
   const handleIncrement = () => {
     setCount(count + 1)
