@@ -1,34 +1,56 @@
 import { useState } from "react";
-import Greeting from "./components/Greeting";
-
-// const name = "John Doe";
-
-// const names = ["John Doe", "Jane Doe", "Jack Doe", "Jerry Doe", "Jenna Doe"];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userState, setUserState] = useState({
+    firstName: "",
+    lastName: "",
+    user: {},
+  });
 
-  const handleIncrement = () => {
-    setCount(count + 1)
-  }
+  const handleInputChange = ({ target: { name, value } }) => {
+    setUserState({ ...userState, [name]: value })
+  };
 
-  const handleDecrement = () => {
-    setCount(count - 1)
-  }
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    const user = {
+      firstName: userState.firstName,
+      lastName: userState.lastName
+    }
+
+    setUserState({ ...userState, user, firstName: '', lastName: '' })
+  };
 
   return (
-    <div className="App">
-      <h1>Count: {count}</h1>
-      <button onClick={handleIncrement}>+</button>
-      <button onClick={handleDecrement}>-</button>
-
-      {/* {names.map((name, i) => (
-        <Greeting key={i} name={name} />
-      ))} */}
-      {/* <Greeting name={name} />
-      <Greeting name="Jane Doe" /> */}
-      {/* {[<button>a</button>, <button>b</button>, <button>c</button>]} */}
-      {/* <button>Click Me</button> */}
+    <div>
+      <form>
+        <p>
+          <label htmlFor="firstName">First Name</label>
+          <input
+            onChange={handleInputChange}
+            value={userState.firstName}
+            type="text"
+            name="firstName"
+          />
+        </p>
+        <p>
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            onChange={handleInputChange}
+            value={userState.lastName}
+            type="text"
+            name="lastName"
+          />
+        </p>
+        <p>
+          <button onClick={handleFormSubmit}>Submit</button>
+        </p>
+      </form>
+      <div>
+        <h3>First Name: {userState.user.firstName}</h3>
+        <h3>Last Name: {userState.user.lastName}</h3>
+      </div>
     </div>
   );
 }
